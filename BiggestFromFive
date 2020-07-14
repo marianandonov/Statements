@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace BiggestFromFive
+{
+    class BiggestFromFive
+    {
+        static void Main(string[] args)
+        {
+            bool tryParse = false;
+            int counter = 0;
+            double num;
+            List<double> list = new List<double>();
+
+            do
+            {
+                Console.Write("Enter a number: ");
+                tryParse = double.TryParse(Console.ReadLine(), out num);
+
+                if (tryParse == true)
+                {
+                    counter++;
+                    list.Add(num);
+                }
+                else
+                {
+                    Console.WriteLine("Try again!");
+                }
+
+            } while (tryParse == false || counter < 5);
+
+            Console.WriteLine($"The biggest from the 5 numbers is {list.Max()}.");
+        }
+    }
+}
