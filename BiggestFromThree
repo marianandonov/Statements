@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace BiggestFromThree
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool tryParse = false;
+            int counter = 0;
+            double num;
+            List<double> list = new List<double>();
+
+            do
+            {
+                Console.Write("Enter a number: ");
+                tryParse = double.TryParse(Console.ReadLine(), out num);
+
+                if (tryParse == true)
+                {
+                    counter++;
+                    list.Add(num);
+                }
+                else
+                {
+                    Console.WriteLine("Try again!");
+                }
+
+            } while (tryParse == false || counter < 3);
+
+            Console.WriteLine($"The biggest from the 3 numbers is {list.Max()}.");
+        }
+    }
+}
