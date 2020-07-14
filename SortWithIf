@@ -1,0 +1,105 @@
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Reflection.Metadata.Ecma335;
+
+namespace SortWithIf
+{
+    class SortWithIf
+    {
+        static void Main(string[] args)
+        {
+
+            bool tryParse = false;
+            int counter = 0;
+            double num, firstPos = 0.0, secondPos = 0.0, thirdPos = 0.0;
+            List<double> list = new List<double>();
+
+            do
+            {
+                Console.Write("Enter a number: ");
+                tryParse = double.TryParse(Console.ReadLine(), out num);
+
+                if (tryParse == true)
+                {
+                    counter++;
+                    list.Add(num);
+                }
+                else
+                {
+                    Console.WriteLine("Try again!");
+                }
+
+            } while (tryParse == false || counter < 3);
+
+            if(list[0] > list[1])
+            {
+                //Num 1 is bigger than 2!
+                if(list[0] > list[2])
+                {
+                    //Num 1 is the biggest!
+                    thirdPos = list[0];
+                    if(list[1] > list[2])
+                    {
+                        //Num 2 is bigger than Num 3!
+                        secondPos = list[1];
+                        firstPos = list[2];
+                    }
+                    else
+                    {
+                        //Num 2 is smaller or equal to Num 3!
+                        secondPos = list[2];
+                        firstPos = list[1];
+                    }
+                } else
+                {
+                    //Num 1 is smaller or equal to Num 3!
+                    thirdPos = list[2];
+                    secondPos = list[0];
+                    firstPos = list[1];
+                }
+            } else if (list[1] > list[2])
+            {
+                //Num 2 is bigger than 3!
+                if (list[1] > list[2])
+                {
+                    //Num 2 is the biggest!
+                    thirdPos = list[1];
+                    if (list[2] > list[0])
+                    {
+                        //Num 3 is bigger than Num 1!
+                        secondPos = list[2];
+                        firstPos = list[0];
+                    }
+                    else
+                    {
+                        //Num 3 is smaller or equal to Num 1!
+                        secondPos = list[0];
+                        firstPos = list[2];
+                    }
+                }
+                else
+                {
+                    //Num 2 is smaller or equal to Num 3!
+                    thirdPos = list[2];
+                    secondPos = list[1];
+                    firstPos = list[0];
+                }
+            }
+            else if (list[2] > list[1])
+            {
+                //Num 3 is bigger than Num 2 and Num 1!
+                thirdPos = list[2];
+                secondPos = list[1];
+                firstPos = list[0];
+            }
+            else
+            {
+                Console.WriteLine("They're all equal!");
+            }
+
+            Console.WriteLine($"{firstPos} | {secondPos} | {thirdPos}");
+
+        }
+    }
+}
