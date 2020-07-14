@@ -1,0 +1,70 @@
+using System;
+
+namespace IntDoubleString
+{
+    class IntDoubleString
+    {
+        static void Main(string[] args)
+        {
+
+            string result = "";
+
+            while (true) {
+                Console.Write("Enter \"int\", \"double\" or \"string\"!: ");
+                result = Console.ReadLine().ToLower();
+
+                if (result.Equals("int") || result.Equals("double") || result.Equals("string"))
+                {
+                    break;
+                } else
+                {
+                    Console.WriteLine("Try again!");
+                }
+            }
+
+            bool tryParse = false;
+
+            do
+            {
+                switch (result)
+                {
+                    case "int":
+                        Console.Write("Enter a whole number: ");
+                        tryParse = int.TryParse(Console.ReadLine(), out int wholeNum);
+                        if (tryParse == true)
+                        {
+                            int wholeNumResult = wholeNum + 1;
+                            Console.WriteLine(wholeNumResult);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Try again!");
+                        }
+                        break;
+                    case "double":
+                        Console.Write("Enter a real number: ");
+                        tryParse = double.TryParse(Console.ReadLine(), out double realNum);
+                        if (tryParse == true)
+                        {
+                            double realNumResult = realNum + 1.0;
+                            Console.WriteLine($"{realNumResult: F2}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Try again!");
+                        }
+                        break;
+                    case "string":
+                        Console.Write("Enter anything: ");
+                        string stringResult = Console.ReadLine() + "*";
+                        Console.WriteLine(stringResult);
+                        tryParse = true;
+                        break;
+                    default:
+                        Console.WriteLine("Try again!");
+                        break;
+                }
+            } while (tryParse == false);
+        }
+    }
+}
