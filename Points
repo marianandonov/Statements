@@ -1,0 +1,50 @@
+using System;
+
+namespace Points
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bool tryParse = false;
+            int points, result = 0;
+
+            do
+            {
+                Console.Write("Enter some points (max 9): ");
+                tryParse = int.TryParse(Console.ReadLine(), out points);
+                if (tryParse == true)
+                {
+                    if (points < 1 || points > 9)
+                    {
+                        Console.WriteLine("Error!");
+                        tryParse = false;
+                    } else
+                    {
+                        break;
+                    }
+                } else
+                {
+                    Console.WriteLine("Try Again!");
+                }
+            } while (tryParse == false);
+
+            if(1 <= points && points <= 3)
+            {
+                result = points * 10;
+            } else if(4 <= points && points <= 6)
+            {
+                result = points * 100;
+            } else if(7 <= points && points <= 9)
+            {
+                result = points * 1000;
+            } else
+            {
+                Console.WriteLine("Something went wrong!");
+            }
+
+            Console.WriteLine($"Your points are {result}");
+
+        }
+    }
+}
