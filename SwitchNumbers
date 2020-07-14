@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+
+namespace SwitchNumbers
+{
+    class SwitchNumbers
+    {
+        static void Main(string[] args)
+        {
+
+            bool tryParse = false;
+            int counter = 0, num;
+            List<int> list = new List<int>();
+
+            do
+            {
+                Console.Write("Enter a number: ");
+                tryParse = int.TryParse(Console.ReadLine(), out num);
+
+                if(tryParse == true)
+                {
+                    counter++;
+                    list.Add(num);
+                }
+                else
+                {
+                    Console.WriteLine("Try again!");
+                }
+
+            } while (tryParse == false || counter < 2);
+
+            if (list[0] > list[1])
+            {
+                Console.Write($"The numbers (Num 1:) {list[0]} and (Num 2:) {list[1]}\nare switched into ");
+                int temp = list[0];
+                list[0] = list[1];
+                list[1] = temp;
+                Console.Write($"(Num 1:) {list[0]} and (Num 2:) {list[1]}.");
+            } else
+            {
+                Console.WriteLine($"There was no need for switching, the numbers\n(Num 1:) {list[0]} and (Num 2:) {list[1]} stay in their positions!");
+            }
+
+        }
+    }
+}
