@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+
+namespace QuadraticEquation
+{
+    class QuadraticEquation
+    {
+        static void Main(string[] args)
+        {
+            bool tryParse = false;
+            int counter = 0;
+            char letter = 'a';
+            double num;
+            List<double> list = new List<double>();
+
+            do
+            {
+                Console.Write($"Enter a number for {letter}: ");
+                tryParse = double.TryParse(Console.ReadLine(), out num);
+
+                if (tryParse == true)
+                {
+                    counter++;
+                    letter++;
+                    list.Add(num);
+                }
+                else
+                {
+                    Console.WriteLine("Try again!");
+                }
+
+            } while (tryParse == false || counter < 3);
+
+            double a = list[0];
+            double b = list[1];
+            double c = list[2];
+
+            double D = Math.Pow(b, 2) - (4 * a * c);
+
+            if(D < 0)
+            {
+                Console.WriteLine("There aren't any possibles values for x!");
+            } else if(D == 0)
+            {
+                double x = -b / (2 * a);
+                Console.WriteLine($"{x:F2}");
+            } else
+            {
+                double x1 = (-b + Math.Sqrt(D)) / (2 * a);
+                double x2 = (-b - Math.Sqrt(D)) / (2 * a);
+                Console.WriteLine($"x1 = {x1:F2} | x2 = {x2:F2}");
+            }
+        }
+    }
+}
