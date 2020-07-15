@@ -1,0 +1,502 @@
+using System;
+using System.Data;
+using System.Net.Http.Headers;
+
+namespace NumsToWords
+{
+    class NumsToWords
+    {
+        static void Main(string[] args)
+        {
+            bool tryParse = false;
+            int num;
+
+            do
+            {
+                Console.Write("Enter a number between 0 and 999: ");
+                tryParse = int.TryParse(Console.ReadLine(), out num);
+                if(tryParse == true)
+                {
+                    if(0 > num || num > 999)
+                    {
+                        Console.WriteLine("Try again!");
+                        tryParse = false;
+                    } else
+                    {
+                        break;
+                    }
+                } else
+                {
+                    Console.WriteLine("Try again!");
+                }
+            } while (tryParse == false);
+
+            char[] numCheck = num.ToString().ToCharArray();
+            string combineChar;
+
+            if (numCheck.Length == 1)
+            {
+                printSingleDigitNums(numCheck, 0, false);
+            } else if(numCheck.Length == 2)
+            {
+                combineChar = numCheck[0] + "" + numCheck[1];
+                printDoubleDigitNums(combineChar, numCheck, 0, 1, false);
+            } else if(numCheck.Length == 3)
+            {
+                combineChar = numCheck[1] + "" + numCheck[2];
+                printTripleDigitNums(num, combineChar, numCheck);
+            } else
+            {
+                Console.WriteLine("Something went wrong!");
+            }
+        }
+
+        static bool checkForAnd(char[] numCheck, string combineChar)
+        {
+            switch (combineChar)
+            {
+                case "00":
+                    return true;
+                case "01":
+                    return true;
+                case "02":
+                    return true;
+                case "03":
+                    return true;
+                case "04":
+                    return true;
+                case "05":
+                    return true;
+                case "06":
+                    return true;
+                case "07":
+                    return true;
+                case "08":
+                    return true;
+                case "09":
+                    return true;
+                case "10":
+                    return true;
+                case "11":
+                    return true;
+                case "12":
+                    return true;
+                case "13":
+                    return true;
+                case "14":
+                    return true;
+                case "15":
+                    return true;
+                case "16":
+                    return true;
+                case "17":
+                    return true;
+                case "18":
+                    return true;
+                case "19":
+                    return true;
+                case "20":
+                    return true;
+                case "30":
+                    return true;
+                case "40":
+                    return true;
+                case "50":
+                    return true;
+                case "60":
+                    return true;
+                case "70":
+                    return true;
+                case "80":
+                    return true;
+                case "90":
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        static void printAnd(char[] numCheck, string combineChar)
+        {
+            if(checkForAnd(numCheck, combineChar) == true)
+            {
+                Console.Write("and ");
+            }
+        }
+
+        static void printSingleDigitNums(char[] numCheck, int index, bool toLower)
+        {
+            if(toLower == true)
+            {
+                switch (numCheck[index])
+                {
+                    case '1':
+                        Console.WriteLine("one");
+                        break;
+                    case '2':
+                        Console.WriteLine("two");
+                        break;
+                    case '3':
+                        Console.WriteLine("three");
+                        break;
+                    case '4':
+                        Console.WriteLine("four");
+                        break;
+                    case '5':
+                        Console.WriteLine("five");
+                        break;
+                    case '6':
+                        Console.WriteLine("six");
+                        break;
+                    case '7':
+                        Console.WriteLine("seven");
+                        break;
+                    case '8':
+                        Console.WriteLine("eight");
+                        break;
+                    case '9':
+                        Console.WriteLine("nine");
+                        break;
+                    default:
+                        Console.WriteLine("Someting went wrong!");
+                        break;
+                }
+            } else
+            {
+                switch (numCheck[index])
+                {
+                    case '0':
+                        Console.WriteLine("Zero");
+                        break;
+                    case '1':
+                        Console.WriteLine("One");
+                        break;
+                    case '2':
+                        Console.WriteLine("Two");
+                        break;
+                    case '3':
+                        Console.WriteLine("Three");
+                        break;
+                    case '4':
+                        Console.WriteLine("Four");
+                        break;
+                    case '5':
+                        Console.WriteLine("Five");
+                        break;
+                    case '6':
+                        Console.WriteLine("Six");
+                        break;
+                    case '7':
+                        Console.WriteLine("Seven");
+                        break;
+                    case '8':
+                        Console.WriteLine("Eight");
+                        break;
+                    case '9':
+                        Console.WriteLine("Nine");
+                        break;
+                    default:
+                        Console.WriteLine("Someting went wrong!");
+                        break;
+                }
+            }
+            
+        }
+
+        static void printDoubleDigitNums(string combineChar, char[] numCheck, int index1, int index2, bool toLower)
+        {
+            if (toLower == true)
+            {
+                switch (combineChar)
+                {
+                    case "10":
+                        Console.WriteLine("ten");
+                        break;
+                    case "11":
+                        Console.WriteLine("eleven");
+                        break;
+                    case "12":
+                        Console.WriteLine("twelve");
+                        break;
+                    case "13":
+                        Console.WriteLine("thirteen");
+                        break;
+                    case "14":
+                        Console.WriteLine("fourteen");
+                        break;
+                    case "15":
+                        Console.WriteLine("fifteen");
+                        break;
+                    case "16":
+                        Console.WriteLine("sixteen");
+                        break;
+                    case "17":
+                        Console.WriteLine("seventeen");
+                        break;
+                    case "18":
+                        Console.WriteLine("eighteen");
+                        break;
+                    case "19":
+                        Console.WriteLine("nineteen");
+                        break;
+                    case "20":
+                        Console.WriteLine("twenty");
+                        break;
+                    case "30":
+                        Console.WriteLine("thirty");
+                        break;
+                    case "40":
+                        Console.WriteLine("forty");
+                        break;
+                    case "50":
+                        Console.WriteLine("fifty");
+                        break;
+                    case "60":
+                        Console.WriteLine("sixty");
+                        break;
+                    case "70":
+                        Console.WriteLine("seventy");
+                        break;
+                    case "80":
+                        Console.WriteLine("eighty");
+                        break;
+                    case "90":
+                        Console.WriteLine("ninty");
+                        break;
+                    default:
+                        switch (numCheck[index1])
+                        {
+                            case '2':
+                                Console.Write("twenty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '3':
+                                Console.Write("thirty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '4':
+                                Console.Write("forty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '5':
+                                Console.Write("fifty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '6':
+                                Console.Write("sixty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '7':
+                                Console.Write("seventy-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '8':
+                                Console.Write("eighty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '9':
+                                Console.Write("ninty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            default:
+                                Console.WriteLine("Something went wrong!");
+                                break;
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (combineChar)
+                {
+                    case "10":
+                        Console.WriteLine("Ten");
+                        break;
+                    case "11":
+                        Console.WriteLine("Eleven");
+                        break;
+                    case "12":
+                        Console.WriteLine("Twelve");
+                        break;
+                    case "13":
+                        Console.WriteLine("Thirteen");
+                        break;
+                    case "14":
+                        Console.WriteLine("Fourteen");
+                        break;
+                    case "15":
+                        Console.WriteLine("Fifteen");
+                        break;
+                    case "16":
+                        Console.WriteLine("Sixteen");
+                        break;
+                    case "17":
+                        Console.WriteLine("Seventeen");
+                        break;
+                    case "18":
+                        Console.WriteLine("Eighteen");
+                        break;
+                    case "19":
+                        Console.WriteLine("Nineteen");
+                        break;
+                    case "20":
+                        Console.WriteLine("Twenty");
+                        break;
+                    case "30":
+                        Console.WriteLine("Thirty");
+                        break;
+                    case "40":
+                        Console.WriteLine("Forty");
+                        break;
+                    case "50":
+                        Console.WriteLine("Fifty");
+                        break;
+                    case "60":
+                        Console.WriteLine("Sixty");
+                        break;
+                    case "70":
+                        Console.WriteLine("Seventy");
+                        break;
+                    case "80":
+                        Console.WriteLine("Eighty");
+                        break;
+                    case "90":
+                        Console.WriteLine("Ninty");
+                        break;
+                    default:
+                        switch (numCheck[index1])
+                        {
+                            case '2':
+                                Console.Write("Twenty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '3':
+                                Console.Write("Thirty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '4':
+                                Console.Write("Forty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '5':
+                                Console.Write("Fifty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '6':
+                                Console.Write("Sixty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '7':
+                                Console.Write("Seventy-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '8':
+                                Console.Write("Eighty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                            case '9':
+                                Console.Write("Ninty-");
+                                printSingleDigitNums(numCheck, index2, true);
+                                break;
+                        }
+                        break;
+                } 
+            }
+        }
+
+        static void checkForSecondDigit(bool noSecondDigit, char[] numCheck, string combineChar)
+        {
+            if (noSecondDigit == true)
+            {
+                printAnd(numCheck, combineChar);
+                printSingleDigitNums(numCheck, 2, true);
+            }
+            else
+            {
+                printAnd(numCheck, combineChar);
+                printDoubleDigitNums(combineChar, numCheck, 1, 2, true);
+            }
+        }
+
+        static void printTripleDigitNums(int num, string combineChar, char[] numCheck)
+        {
+            bool noSecondDigit = (numCheck[1] == '0');
+
+            switch (num)
+            {
+                case 100:
+                    Console.WriteLine("One hundred");
+                    break;
+                case 200:
+                    Console.WriteLine("Two hundred");
+                    break;
+                case 300:
+                    Console.WriteLine("Three hundred");
+                    break;
+                case 400:
+                    Console.WriteLine("Four hundred");
+                    break;
+                case 500:
+                    Console.WriteLine("Five hundred");
+                    break;
+                case 600:
+                    Console.WriteLine("Six hundred");
+                    break;
+                case 700:
+                    Console.WriteLine("Seven hundred");
+                    break;
+                case 800:
+                    Console.WriteLine("Eight hundred");
+                    break;
+                case 900:
+                    Console.WriteLine("Nine hundred");
+                    break;
+                default:
+                    switch (numCheck[0])
+                    {
+                        case '1':
+                            Console.Write("One hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '2':
+                            Console.Write("Two hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '3':
+                            Console.Write("Three hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '4':
+                            Console.Write("Four hundred ");
+                            if (noSecondDigit == true)
+                                checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '5':
+                            Console.Write("Five hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '6':
+                            Console.Write("Six hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '7':
+                            Console.Write("Seven hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '8':
+                            Console.Write("Eight hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        case '9':
+                            Console.Write("Nine hundred ");
+                            checkForSecondDigit(noSecondDigit, numCheck, combineChar);
+                            break;
+                        default:
+                            Console.WriteLine("Something went wrong!");
+                            break;
+                    }
+                    break;
+            }
+        }
+    }
+}
